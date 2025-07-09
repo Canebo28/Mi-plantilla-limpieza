@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Costos - Servicio de Limpieza de Tanques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85em;
+        }
+        
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .concept-cell {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: left;
+            padding-left: 15px;
+        }
+        
+        .description-cell {
+            text-align: left;
+            padding-left: 15px;
+            color: #34495e;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .calculated-cell {
+            background: #e8f5e8;
+            font-weight: 600;
+            color: #27ae60;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .total-row td {
+            padding: 15px 10px;
+            border: none;
+        }
+        
+        .filters-section {
+            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .filters-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .filters-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .filters-table th {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        .currency {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .print-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.8em;
+            }
+            
+            th, td {
+                padding: 8px 5px;
+            }
+            
+            .input-field {
+                padding: 6px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CENTRO DE COSTO</h1>
+            <p>SERVICIO DE LIMPIEZA DE TANQUES</p>
+        </div>
+        
+        <div class="content">
+            <div class="table-container">
+                <table id="mainTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">CONCEPTO</th>
+                            <th style="width: 30%;">DESCRIPCIÓN</th>
+                            <th style="width: 10%;">UNIDAD</th>
+                            <th style="width: 12%;">PRECIO UNIT.</th>
+                            <th style="width: 10%;">CANTIDAD</th>
+                            <th style="width: 12%;">COSTO (COTIZAC.)</th>
+                            <th style="width: 12%;">REAL (USADO)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Maquinaria y Equipos -->
+                        <tr>
+                            <td class="concept-cell" rowspan="5">Maquinaria y Equipos</td>
+                            <td class="description-cell">HC-90</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="180" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">MTC-3000</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="80" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">MTC-500 AFR</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="50" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Pre-filtro de MTC-3000</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="12" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Pre-filtro de MTC-500 AFR</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="6" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        
+                        <!-- Personal -->
+                        <tr>
+                            <td class="concept-cell" rowspan="4">Personal</td>
+                            <td class="description-cell">Hidrolavadora</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="15" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Supervisor responsable</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="40" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="168" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$6,720.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Supervisor SOMA</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="10" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="168" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$1,680.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Ayudantes</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="6" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="672" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$4,032.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        
+                        <!-- Consumibles -->
+                        <tr>
+                            <td class="concept-cell" rowspan="5">Consumibles</td>
+                            <td class="description-cell">Aditivo AFC-705</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="187.20" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Filtros HC 90</td>
+                            <td>UND</td>
+                            <td><input type="number" class="input-field" value="175" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Filtros MTC 3000 / 1000</td>
+                            <td>UND</td>
+                            <td><input type="number" class="input-field" value="60" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Filtros tipo bolsa</td>
+                            <td>UND</td>
+                            <td><input type="number" class="input-field" value="10" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Otros (trapo, papel absorbente, detergente, etc.)</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="15" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        
+                        <!-- Implementos Seguridad -->
+                        <tr>
+                            <td class="concept-cell" rowspan="3">Implementos Seguridad</td>
+                            <td class="description-cell">EPIs básicos (casco, chaleco, lentes, mameluco, guantes, botas, chaleco)</td>
+                            <td>JGO</td>
+                            <td><input type="number" class="input-field" value="50" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">EPPs Bioseguridad (respirador, overol, lentes google, careta, guantes, mascarillas)</td>
+                            <td>JGO</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">EPPs específicos (arnés, línea de vida, kit de botas de agua, guantes neopreno)</td>
+                            <td>JGO</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        
+                        <!-- Logística -->
+                        <tr>
+                            <td class="concept-cell" rowspan="9">Logística</td>
+                            <td class="description-cell">Transporte fuera de Lima metropolitana y Callao</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Transporte local</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Camioneta Pick Up (alquiler)</td>
+                            <td>DÍA</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Montacarga (alquiler)</td>
+                            <td>H/M</td>
+                            <td><input type="number" class="input-field" value="30" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Inducción (costo de cursos por persona)</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Inducción Supervisor responsable</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="15" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Inducción Supervisor SOMA</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="10" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Inducción Ayudante</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="6" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">EMOs (costo de exámenes en clínica correspondiente)</td>
+                            <td>UND</td>
+                            <td><input type="number" class="input-field" value="130" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        
+                        <!-- Otros costos -->
+                        <tr>
+                            <td class="concept-cell" rowspan="7">Otros costos</td>
+                            <td class="description-cell">EMOs Supervisor responsable (incluye prueba covid)</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">EMOs Supervisor SOMA (incluye prueba covid-19)</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">EMOs Ayudante (incluye prueba covid-19)</td>
+                            <td>H/H</td>
+                            <td><input type="number" class="input-field" value="56.28" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Otros gastos logísticos</td>
+                            <td>GBL</td>
+                            <td><input type="number" class="input-field" value="11.98" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Análisis de muestras en laboratorio externo</td>
+                            <td>UND</td>
+                            <td><input type="number" class="input-field" value="41.30" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Seguros SCTR</td>
+                            <td>P/P</td>
+                            <td><input type="number" class="input-field" value="8.76" step="0.01" oninput="calculateRow(this)"></td>
+                            <td><input type="number" class="input-field" value="0" step="0.01" oninput="calculateRow(this)"></td>
+                            <td class="calculated-cell currency">$0.00</td>
+                            <td><input type="number" class="input-field" value="0" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="description-cell">Costos administrativos (sobre el total de costos)</td>
